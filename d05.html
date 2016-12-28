@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--指定angular管理的范围-->
+<html ng-app="app01">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>指令</title>
+	</head>
+
+	<body>
+		<!--指定控制器的作用范围-->
+		<form ng-controller="Controller1" name="form1" ng-init="header='header.html'">
+			<ng-include src="header"></ng-include>
+			<ng-include src="'header.html'"></ng-include>
+			
+			<script id="template1" type="text/ng-template">
+				您想购买的商品是:{{product}}
+			</script>
+			
+			<ng-include src="'template1'" onLoad="product='SD卡'"></ng-include>
+			<ng-include src="'template1'" onLoad="product='TF卡'"></ng-include>
+			
+			<div ng-include="'footer.html'"></div>
+		</form>
+		<!--引入angularjs框架-->
+		<script src="js/angular146/angular.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			//定义模块，指定依赖项为空
+			var app01 = angular.module("app01", []);
+			//定义控制器，指定控制器的名称，$scope是全局对象
+			app01.controller("Controller1", function($scope) {
+			});
+			function regTest()
+			{
+				var reg1=new RegExp("\d","igm");
+				var reg2=/\d/igm;
+				
+				var str="This is some bad,dark evil text";
+				str=str.replace(/bad|dark|evil/igm,"Happy");
+			    console.log(str);
+			    
+			    //取出Hello Hello
+			    var str="<input value='Hello'/><input value='World'/>";
+			    //将value中的内容前后增加一个*
+			}
+			regTest();
+		</script>
+	</body>
+
+</html>

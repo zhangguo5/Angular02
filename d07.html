@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<!--指定angular管理的范围-->
+<html ng-app="app01">
+	<head>
+		<meta charset="UTF-8">
+		<title>指令</title>
+	</head>
+	<body>
+		<!--指定控制器的作用范围-->
+		<form ng-controller="Controller1" name="form1">
+			<h3>基础下拉列表：</h3>
+			<p>
+				<select ng-model="user1" ng-options="u.name for u in users">
+					<option value="">--请选择--</option>
+				</select>
+				<span> {{user1}}</span>
+			</p>
+			<h3>带分组的下拉列表：</h3>
+			<p>
+				<select ng-model="user2" ng-options="u.name group by u.sex for u in users">
+					<option  value="">--请选择--</option>
+				</select>
+				<span> {{user2}}</span>
+			</p>
+			<h3>组合的下拉列表：</h3>
+			<p>
+				<select ng-model="user3" ng-options="(u.name+u.age+'岁') group by u.sex for u in users">
+					<option  value="">--请选择--</option>
+				</select>
+				<span> {{user3}}</span>
+			</p>
+			<h3>自定义ng-model的值：</h3>
+			<p>
+				<select ng-model="user4" ng-options="u.id as u.name group by u.sex for u in users">
+					<option  value="">--请选择--</option>
+				</select>
+				<span> {{user4}}</span>
+			</p>
+		</form>
+		<!--引入angularjs框架-->
+		<script src="js/angular146/angular.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			//定义模块，指定依赖项为空
+			var app01 = angular.module("app01", []);
+			//定义控制器，指定控制器的名称，$scope是全局对象
+			app01.controller("Controller1", function($scope) {
+				$scope.users = [{
+					id: 1,
+					name: "tom",
+					sex: "男",
+					age: 19
+				}, {
+					id: 2,
+					name: "rose",
+					sex: "女",
+					age: 18
+				}, {
+					id: 7,
+					name: "jack",
+					sex: "男",
+					age: 16
+				}, {
+					id: 9,
+					name: "lucy",
+					sex: "女",
+					age: 20
+				}, {
+					id: 15,
+					name: "mark",
+					sex: "男",
+					age: 89
+				}];
+			});
+		</script>
+	</body>
+</html>

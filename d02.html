@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--指定angular管理的范围-->
+<html ng-app="app01">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>过滤器</title>
+	</head>
+
+	<body>
+		<!--指定控制器的作用范围-->
+		<form ng-controller="Controller1" name="form1">
+			<p>
+				货币：{{money}} ，{{money|currency}} ，{{money|currency:"￥"}}
+			</p>
+			<p>
+				数字：{{money|number:1}} ，{{money | number:1 | currency:"$" }}
+			</p>
+			<p>
+				大写：{{message|uppercase}}
+			</p>
+			<p>
+				小写：{{message|lowercase}}
+			</p>
+			<p>
+				json：{{user | json}}
+			</p>
+			<p>
+				截取：{{message|limitTo:5|uppercase}}
+			</p>
+			<p>
+				日期1：{{birthday|date:'yyyy年MM月dd日 HH:mm:ss'}}
+			</p>
+			<p>
+				日期2：{{birthday|date:'fullDate'}}
+			</p>
+			<p>
+				排序：{{users|orderBy:'age':true}}
+			</p>
+			<p>
+				过滤：{{users|filter:'o'}}
+			</p>
+		</form>
+		<!--引入angularjs框架-->
+		<script src="js/angular146/angular.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			//定义模块，指定依赖项为空
+			var app01 = angular.module("app01", []);
+
+			//定义控制器，指定控制器的名称，$scope是全局对象
+			app01.controller("Controller1", function($scope) {
+				$scope.money=1985.678;
+				$scope.message="Hello AngularJS!"
+				$scope.user={name:"rose",age:18};
+				$scope.birthday=new Date();
+				$scope.users=[{name:"rose",age:18},{name:"jack",age:19},{name:"tom",age:17}];
+			});
+		</script>
+	</body>
+
+</html>

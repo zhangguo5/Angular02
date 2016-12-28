@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!--指定angular管理的范围-->
+<html ng-app="app01">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>验证</title>
+	</head>
+
+	<body>
+		<!--指定控制器的作用范围-->
+		<form ng-controller="Controller1" name="form1">
+			<p>
+				<label for="username">帐号：</label>
+				<input type="text" id="username" name="username" ng-model="username" ng-required="true" />
+				<span ng-show="form1.username.$error.required">必填</span>
+			</p>
+			<p>
+				<label for="username">密码：</label>
+				<input type="text" id="password" name="password" ng-model="password" ng-required="true" ng-pattern="/^[a-z]{6,8}$/" ng-trim="true"/>
+				<span ng-show="form1.password.$error.required">必填</span>
+				<span ng-show="form1.password.$error.pattern">只允许6-8位小写字母</span>
+			</p>
+			<p>
+				密码的值：{{"["+password+"]"}}<br/>
+				是否合法：form1.password.$valid={{form1.password.$valid}}<br/>
+				是否非法：form1.password.$invalid={{form1.password.$invalid}}<br/>
+				错误消息：form1.password.$error={{form1.password.$error}}<br/>
+				是否修改：form1.password.$dirty={{form1.password.$dirty}}<br/>
+				是否默认：form1.password.$pristine={{form1.password.$pristine}}<br/>
+			</p>
+			<p>
+				表单信息：<br/>
+				错误消息：form1.$error={{form1.$error}}<br/>
+				是否合法：form1.$valid={{form1.$valid}}<br/>
+				是否非法：form1.$invalid={{form1.$invalid}}<br/>
+			</p>
+			<p>
+				<button ng-disabled="form1.$invalid">提交</button>
+			</p>
+			<input type="checkbox" ng-model="sex" ng-true-value="女"  ng-false-value="男" />是女生吗？
+			<br />
+			{{sex}}
+		</form>
+		<!--引入angularjs框架-->
+		<script src="js/angular146/angular.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			//定义模块，指定依赖项为空
+			var app01 = angular.module("app01", []);
+
+			//定义控制器，指定控制器的名称，$scope是全局对象
+			app01.controller("Controller1", function($scope) {
+
+			});
+		</script>
+	</body>
+
+</html>

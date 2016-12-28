@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--指定angular管理的范围-->
+<html ng-app="app01">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>指令</title>
+	</head>
+
+	<body>
+		<!--指定控制器的作用范围-->
+		<form ng-controller="Controller1">
+			
+		<my-Timer color="blue" passed="0" interval="1000"></my-Timer>
+		</form>
+		<!--引入angularjs框架-->
+		<script src="js/angular146/angular.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			//定义模块，指定依赖项为ngTouch
+			var app01 = angular.module("app01", []);
+			
+			//定义控制器，指定控制器的名称，$scope是全局对象
+			app01.controller("Controller1", function($scope) {
+				
+			});
+			
+			//在模块app01上定义curentTime指令
+			app01.directive("myTimer",function(){
+				return {
+					template:"<span style='color:{{color}}'></span>",  //模板
+					restrict:"AE",  //可应用范围
+					replace:true, //是否替换
+					scope:{
+						color:'@'
+					},
+					link:function(scope,elem,attr,controller){
+						var i=attr.interval||1000;
+						elem.text(new Date().toLocaleString()+"    已计时："+attr.passed+"秒");  //向元素中设置文本为当前时间
+						//定时器，每隔指定的时间调用函数
+						setInterval(function(){
+							attr.passed=parseInt(attr.passed)+parseInt(i/1000);
+							elem.text(new Date().toLocaleString()+"    已计时："+attr.passed+"秒");  //向元素中设置文本为当前时间
+						},i);
+					}
+				};
+			});
+		</script>
+	</body>
+
+</html>

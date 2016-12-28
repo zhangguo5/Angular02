@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html ng-app="demoApp">
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+
+	<body>
+		<form name="form1" ng-controller="demoController">
+			<div ng-include="'d01.html'" onload=""></div>
+			<ng-include src="'d01.html'"></ng-include>
+			<!--<ng-include src="" [onload=""] [autoscroll=""]></ng-include>
+<ANY ng-include="" [onload=""] [autoscroll=""]></ANY>
+<ANY class="ng-include: ; [onload: ;] [autoscroll: ;]"> </ANY>-->
+
+			<script id="p1" type="text/ng-template">
+				partial of type {{type}}
+				<br>
+			</script>
+			<ng-include src="'p1'" onInclude="type='billing'"></ng-include>
+			<ng-include src="'p1'" onLoad="type='delivery'"></ng-include>
+
+		</form>
+		<script src="js/angular146/angular.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var demoApp = angular.module("demoApp", []);
+			demoApp.controller("demoController", function($scope) {
+				$scope.message = "click to pascal";
+			});
+		</script>
+	</body>
+
+</html>
